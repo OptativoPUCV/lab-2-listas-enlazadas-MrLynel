@@ -29,7 +29,7 @@ Node * createNode(void * data) {
 }
 
 List *createList() {
-    List *list = (List *)malloc(sizeof(List));
+    List *list = (List *)malloc(sizeof(List));//se asigna memoria
     assert(list != NULL);
     list->head = NULL;
     list->tail = NULL;
@@ -129,9 +129,34 @@ void * popBack(List * list) {
     return popCurrent(list);
 }
 
-void * popCurrent(List * list) {
-    return NULL;
+
+void *popCurrent(List *list) {
+    if (list == NULL || list->current == NULL) {
+        return NULL; // si no hay nada no se retorna nada
+    }
+
+    Node *nodeToRemove = list->current; //referencia al que se va a eliminar
+    void *data = nodeToRemove->data;  //almaceno el dato del qu se va a elminar
+
+    if (nodeToRemove->prev != NULL) {
+        nodeToRemove->prev->next = nodeToRemove->next;
+    } else {
+        list->head = nodeToRemove->next; //si es justo el head actualizamos
+    }
+
+    if (nodeToRemove->next != NULL) {
+        nodeToRemove->next->prev = nodeToRemove->prev;
+    } else {
+        list->tail = nodeToRemove->prev;// en caso de que sea el tail se actualiza
+    }
+
+    list->current = nodeToRemove->next; //hacemos que apunte al siguente del eliminado
+
+    free(nodeToRemove);//liberamos memoria
+
+    return data;//retorno el valor
 }
+
 
 void cleanList(List * list) {
     while (list->head != NULL) {
