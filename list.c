@@ -47,9 +47,14 @@ void *firstList(List *list) {
 }
 
 
-void * nextList(List * list) {
-    return NULL;
+void *nextList(List *list) {//verifico si hay algo
+    if (list == NULL || list->current == NULL) {
+        return NULL;//en caso de que este vacia retorno null
+    }
+    list->current = list->current->next; //actualizo
+    return list->current;// retorno el dato actual
 }
+
 
 void * lastList(List * list) {
     return NULL;
