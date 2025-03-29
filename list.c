@@ -38,9 +38,14 @@ List *createList() {
 }
 
 
-void * firstList(List * list) {
-    return NULL;
+void *firstList(List *list) {
+    if (list == NULL || list->head == NULL) { //verifico si hay algo
+        return NULL; //en caso de que este vacia retorno null
+    }
+    list->current = list->head;//actualizo
+    return list->head;//retorno el dato en el head
 }
+
 
 void * nextList(List * list) {
     return NULL;
