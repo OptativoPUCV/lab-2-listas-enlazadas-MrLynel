@@ -76,8 +76,23 @@ void *prevList(List *list) {
 }
 
 
-void pushFront(List * list, void * data) {
+void pushFront(List *list, void *data) {
+    Node *newNode = createNode(data);
+    if (list == NULL) {
+        return; //si no hay nada return null
+    }
+    if (list->head == NULL) {
+        list->head = newNode;//inicializamos puntero a head
+        list->tail = newNode;// lo mismo con el tail
+    } else {//en caso de que si hayan elementos
+        newNode->next = list->head; //se apunta al head
+        list->head->prev = newNode; //se apunta al nuevo nodo
+        list->head = newNode; //actualizo
+    }
+
+    // No se actualiza current en esta función, ya que depende de la lógica de navegación
 }
+
 
 void pushBack(List * list, void * data) {
     list->current = list->tail;
