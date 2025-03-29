@@ -58,13 +58,23 @@ void *nextList(List *list) {
 
 
 
-void * lastList(List * list) {
-    return NULL;
+void *lastList(List *list) {
+    if (list == NULL || list->tail == NULL) { 
+        return NULL;//la lista esta vacia, retorno null
+    }
+    list->current = list->tail;//actualizo al ultimo elemento
+    return list->current->data;//retorno el dato
 }
 
-void * prevList(List * list) {
-    return NULL;
+
+void *prevList(List *list) {
+    if (list == NULL || list->current == NULL || list->current->prev == NULL) {
+        return NULL;// si no hay datos retorno null
+    }
+    list->current = list->current->prev; //actualizo para tener el dato del nodo anterior 
+    return list->current->data; //y retorno el dato
 }
+
 
 void pushFront(List * list, void * data) {
 }
