@@ -99,8 +99,25 @@ void pushBack(List * list, void * data) {
     pushCurrent(list,data);
 }
 
-void pushCurrent(List * list, void * data) {
+void pushCurrent(List *list, void *data) {
+    if (list == NULL || list->current == NULL) {//verificar si existe y en caso de que no haya nada no hacer nada
+        return;
+    }
+
+    Node *newNode = createNode(data); //se creea un nuevo nodo
+
+    newNode->prev = list->current;  //enlazamos y ahora el actual es el previo al nuevo nodo
+    newNode->next = list->current->next;  // y el siguiente del actual sera el nuevo nodo
+
+    if (list->current->next != NULL) {   //en caso de existir un nodo se actualiza su puntero del prev
+        list->current->next->prev = newNode;
+    } else {
+        list->tail = newNode; //en caso contrario va al tail
+    }
+
+    list->current->next = newNode;// actualizamos el cactual para que apunte al nuevo
 }
+
 
 void * popFront(List * list) {
     list->current = list->head;
