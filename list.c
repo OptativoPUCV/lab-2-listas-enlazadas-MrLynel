@@ -39,21 +39,23 @@ List *createList() {
 
 
 void *firstList(List *list) {
-    if (list == NULL || list->head == NULL) { //verifico si hay algo
-        return NULL; //en caso de que este vacia retorno null
+    if (list == NULL || list->head == NULL) { 
+        return NULL; //la lista esta vacia, retorno null
     }
-    list->current = list->head;//actualizo
-    return list->head;//retorno el dato en el head
+    list->current = list->head; //actualizo el dato actual 
+    return list->current->data; //retorno el dato que se encuentra ahi
 }
 
 
-void *nextList(List *list) {//verifico si hay algo
-    if (list == NULL || list->current == NULL) {
-        return NULL;//en caso de que este vacia retorno null
+
+void *nextList(List *list) {
+    if (list == NULL || list->current == NULL || list->current->next == NULL) {
+        return NULL; //la lista esta vacia, retorno null
     }
-    list->current = list->current->next; //actualizo
-    return list->current;// retorno el dato actual
+    list->current = list->current->next; //actualizo al dato que viene
+    return list->current->data; //lo retorno
 }
+
 
 
 void * lastList(List * list) {
