@@ -100,11 +100,18 @@ void pushBack(List * list, void * data) {
 }
 
 void pushCurrent(List *list, void *data) {
-    if (list == NULL || list->current == NULL) {//verificar si existe y en caso de que no haya nada no hacer nada
+    if (list == NULL) {//verificar si existe y en caso de que no haya nada no hacer nada
         return;
     }
 
     Node *newNode = createNode(data); //se creea un nuevo nodo
+
+    if (list->current == NULL && list->head == NULL){
+        list->head = newNode;
+        list->tail = newNode;
+        return;
+    }
+
 
     newNode->prev = list->current;  //enlazamos y ahora el actual es el previo al nuevo nodo
     newNode->next = list->current->next;  // y el siguiente del actual sera el nuevo nodo
